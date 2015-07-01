@@ -1,0 +1,68 @@
+
+<%= form_for(@goal) do |f| %>
+  <% if @goal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@goal.errors.count, "error") %> prohibited this goal from being saved:</h2>
+
+      <ul>
+      <% @goal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+   <div class="col-lg-4">
+      <% TypeGoal.all.each do |tgoal|%>
+      <br>
+        <%= f.radio_button :type_goal_id, tgoal.id , :checked =>true %>
+      <%= f.label :type_goal_id, ""+tgoal.tip%>
+        <br>
+      <%end%>
+    </div>
+ 
+ 
+  <div class="col-lg-4">
+    <div class="field">
+    <%= f.label :Frequency %><br />
+    <%= f.select :frequency ,["Day","Week","Month","Year"], {},:style =>"width:100px; font-size:14px;",class:"form-control input-lg"%>
+  </div>
+  
+  <div class="field">
+    <%= f.label :goal %><br>
+    <%= f.number_field :goal, class:"form-control input-lg" %>
+  </div>
+  
+ 
+ 
+  
+   <div class="field">
+        <%= f.hidden_field :user_id, :value => current_user.id%>
+        </div>
+          <div class="field">
+        <%= f.hidden_field :automatic_goal, :value => false%>
+        </div>
+  
+  
+  <br>
+  <br>
+  <br>
+   <div class="actions">
+    <%= f.submit :Created,class:"btn btn-success btn-lg"%>
+  </div>
+
+
+
+  </div>
+
+  <div class="col-lg-4">
+
+  <img src="/assets/goals.jpg" width="100%" class="img-rounded">
+  </div>
+  <br>
+
+</div>
+  
+<% end %>

@@ -1,0 +1,47 @@
+<%= form_for(@session) do |f| %>
+  <% if @session.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@session.errors.count, "error") %> prohibited this session from being saved:</h2>
+
+      <ul>
+      <% @session.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<center>
+  <div class="field">
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  </div>
+
+  <div class="field">
+   <%= f.label :select_the_exercise_you_will_be_doing %><br />
+<%= f.collection_select :type_session_id ,TypeSession.all, :id ,:tipo,:style =>"width:80px; font-size:14px;"%>
+  </div>
+<!--
+  <div class="field">
+    <%= f.label :burned_calories %><br>
+    <%= f.number_field :burned_calories ,class:"form-control input-lg"%>
+  </div>
+  <div class="field">
+    <%= f.label :hearth_rate %><br>
+    <%= f.number_field :hearth_rate ,class:"form-control input-lg"%>
+  </div>
+  <div class="field">
+    <%= f.label :total_time %><br>
+    <%= f.time_select :total_time ,class:"form-control input-lg"%>
+  </div>
+  <div class="field">
+    <%= f.label :time_started %><br>
+    <%= f.datetime_select :time_started %>
+  </div>
+-->
+<br> 
+<div class="actions btn-group">
+     <%= f.submit 'New Session',class:"btn btn-primary btn-sm"%>
+     <%= link_to 'Back', fitness_sessions_path, :class=>'btn btn-default btn-sm' %>
+  </div>
+</center>
+<% end %>

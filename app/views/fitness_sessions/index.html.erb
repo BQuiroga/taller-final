@@ -1,0 +1,101 @@
+<title>Fitness Sessions | FiTrack</title>
+    <div id="page-content-wrapper" style="margin-left:3%;">
+    <div class="container"> 
+    <h1 style="border-bottom: 1px solid #A6AAA9; color: #000000;">Fitness Sessions</h1>  
+
+    <p id="notice"><%= notice %></p>
+    <center>
+          <div class="row ">
+            <div class="col-xs-6 col-md-4">
+             <img class="img-responsive" src="assets/ciclismo.jpg" alt="Generic placeholder image" >
+
+              <h4>Cycling</h4>
+              
+            </div>
+            <div class="col-xs-6 col-md-4">
+              <img class="img-responsive" src="assets/pesasindex.jpg" alt="Generic placeholder image">
+              <h4>Weight Lifting</h4>
+              
+            </div>
+            <div class="col-xs-6 col-md-4">
+              <img class="img-responsive" src="assets/trote.jpg" alt="Generic placeholder image" >
+              <h4>Jogging</h4>
+              
+            </div>
+            </div>
+      </center>
+            <br>
+
+     <div class="row ">
+
+ 
+  <table class="table table-striped">
+    <col width="10%">
+    <col width="20%">
+    <col width="15%">
+    <col width="15%">
+    <col width="20%">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Type session</th>
+      <th>Time started</th>
+      <th>Time finished</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @sessions.each do |session| %>
+      <tr>
+        <td><%= session.id%></td>
+        <td><%= session.type_session.tipo %></td>
+        <td>
+          <%if session.time_started == nil%>
+              <p class='text-muted'>Not started</p>
+          <%else%>
+              <%= session.time_started.strftime('%a, %e %b %Y %H:%M') %>
+          <%end%>
+        </td>
+        <td>
+
+          <%if session.time_started == nil%>
+              <p class='text-muted'>Not started</p>
+          <%elsif session.time_finished == nil%>
+              <p class='text-muted'>Not finished</p>
+          <%else%>
+            <%= session.time_finished.strftime('%a, %e %b %Y %H:%M') %>
+          <%end%>
+        </td>
+        
+        <td>
+        <div class='btn btn-group'>
+        <%= link_to 'Show', session, class:"btn btn-xs btn-primary"%>
+        <% if session.time_started == nil %>
+          <a href="/fitness_sessions/<%=session.id%>/start" class="btn btn-xs   btn-success"> Begin </a>
+        <% elsif session.time_finished==nil %>
+          <a href="/fitness_sessions/<%=session.id%>/end" class="btn btn-xs btn-warning">Finish</a>
+        <% else %>
+          <button type="button" class="btn btn-xs btn-primary" disabled="disabled">Finished</button>
+        <% end %>
+        <%= link_to 'Destroy', session, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-xs btn-danger"%>
+        </div>
+      </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+
+<br>
+<br>
+<br>
+<center>
+<%= link_to 'New Session', new_fitness_session_path, class:"btn btn-primary btn-sm" %>
+</center>
+
+</div>
+</div>

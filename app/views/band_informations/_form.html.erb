@@ -1,0 +1,50 @@
+<%= form_for(@band_information) do |f| %>
+  <% if @band_information.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@band_information.errors.count, "error") %> prohibited this band_information from being saved:</h2>
+
+      <ul>
+      <% @band_information.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :calories %><br>
+    <%= f.number_field :calories %>
+  </div>
+  <div class="field">
+    <%= f.label :steps %><br>
+    <%= f.number_field :steps %>
+  </div>
+  <div class="field">
+    <%= f.label :heart_rate %><br>
+    <%= f.number_field :heart_rate %>
+  </div>  
+  <div class="field">
+    <%= f.label :lat %><br>
+    <%= f.number_field :lat %>
+  </div>
+  <div class="field">
+    <%= f.label :long %><br>
+    <%= f.number_field :long %>
+  </div>
+  <div class="field">
+    <%= f.label :sleep_quality %><br>
+    <%= f.number_field :sleep_quality %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :user_id,:value => current_user.id %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :band_id , :value => current_user.bands.first.id %>
+  </div>
+  <div class="actions">
+  <div class='btn-group'>
+      <%= f.submit 'Create', :class=>'btn btn-primary btn-sm'%>
+      <%= link_to 'Back', band_informations_path , :class=>'btn btn-default btn-sm'%>
+  </div>
+  </div>
+<% end %>

@@ -1,0 +1,105 @@
+
+<html lang="en">
+
+<head>
+
+    <title>Goals | FiTrack</title>
+    <meta property="og:url" content="http://fitrackucb.herokuapp.com/" />
+    <meta property="og:title" content="Goals Fitrack" />
+    <meta property="og:description" content="Congratulations you completed a goal" /> 
+    <meta property="og:image" content="http://fitrackucb.herokuapp.com" />
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    
+
+   
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="assets/simple-sidebar.css" rel="stylesheet">
+
+    <link href=" https://developers.facebook.com/docs/plugins/">
+
+ 
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  
+ 
+
+   
+    
+</head>
+
+<body>
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+
+
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.3";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+    
+<div id="page-content-wrapper">
+<div class="container"> 
+      <h1 style="border-bottom: 1px solid #A6AAA9; color: #000000;">Goals</h1>
+      <br>
+
+      <!-- Three columns of text below the carousel -->
+
+      <div class="row">
+        <% @goals.each do |tgoal| %>
+      
+        <div class="col-lg-4" align="center">
+        <br>
+          <img class="img-circle" src="<%=tgoal.type_goal.img%>" alt="Generic placeholder image" width="140" height="140">
+          <!>
+          <h2><td><%= tgoal.type_goal.tip%></td></h2>
+          <p><strong>Goal: </strong><%= tgoal.goal %><br>
+         
+          <strong>Frecuency: </strong><%= tgoal.frequency %><br></p>
+           <%if tgoal.complete==true%>
+                <p style="color: #00CC00;">Completed!<br>
+                 <a href="http://www.facebook.com/sharer.php?s=100&p[url]=http://fitrackucb.herokuapp.com?s=100&p[title]=Goals+Fitrack&p[images][0]=http://fitrackucb.herokuapp.com&p[summary]=Congratulations+you+completed+a+goal" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"><img src='/assets/share.png' width='20%'></a></p>
+                <%else%>
+               <p style="color: #C80000;">Not completed!</p>
+               
+          <%end%>
+        <div class="btn btn-group" align='center'>
+          <%= link_to 'Show', tgoal ,class:"btn btn-default btn-xs"%>
+          <%if tgoal.automatic_goal ==false%>
+          <%= link_to 'Destroy', tgoal, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger btn-xs" %>
+          <%end%>
+        </div>
+      </div>
+      <% end %>
+                <!--<%= link_to 'New Goal', new_goal_path %>-->
+                
+</div>
+<br><center>
+  <div class="btn btn-group" align='center'>
+     <%= link_to 'New Goal', new_goal_path, class:"btn btn-primary btn-sm" %>
+     <button class='btn btn-default btn-sm'><a href="#">Back to top</a></button>
+    </p>
+</div>
+</center>
+
+<br><br>
+</body>
+</html>
+
